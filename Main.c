@@ -293,35 +293,6 @@ float_t gTonScaleOffset = 0;
 
 float_t gMaxIloadForFED = 1600;
 
-void Calculate_optimal_freqV2()
-{
-	float_t Iload = gOutputCurrent;
-
-	//gTon = (48.79220657 + gTonScaleOffset) * Iload / (gInputVoltage - gOutputVoltage) + 107.9008268 + gTonOffset;
-	//gTon = (0.356467917 + gTonScaleOffset) * Iload + 107.9596247 + gTonOffset;
-
-	gTon = (50.08906596 + gTonScaleOffset) * Iload / (gInputVoltage - gOutputVoltage) + 98.04823254 + gTonOffset;
-	gCompareA = (uint32_t)256 * 25.6 * (gTon + gPWMCh123.risingEdgeDelayNs + gCompareOffsetNs);
-
-
-	if(Iload > gMaxIloadForFED) {
-		gFEDns_cal = 88;
-	}else if(Iload > 0) {
-
-		//gFEDns_cal = -0.00000006 * Iload * Iload * Iload + 0.0003 * Iload * Iload - 0.371 * Iload + 268;
-		gFEDns_cal = 0.0001 * Iload * Iload -0.2685 * Iload + 258  + gFEDns_cal_offset;
-	}else{
-
-	}
-
-	//gFEDns_cal = 0.0002 * Iload * Iload -0.3669 * Iload + 279.8 + gFEDns_cal_offset;
-	//gFEDns_cal = -0.1729 * Iload  + 252.85 + gFEDns_cal_offset;
-
-
-	//gPeriod = 0.094901377 *  gInputVoltage * (gTon + (gPWMCh123.risingEdgeDelayNs + gPWMCh123.fallingEdgeDelayNs)/2) / gReferenceVoltage + 10.2525457 + gPeriodOffset;
-	gPeriod = 0.096894246 *  gInputVoltage * (gTon + (gPWMCh123.risingEdgeDelayNs + gPWMCh123.fallingEdgeDelayNs)/2) / gReferenceVoltage + 3.717242036 + gPeriodOffset;
-
-}
 
 void Calculate_optimal_freq_directCMPA()
 {
@@ -399,43 +370,6 @@ void Calculate_optimal_pointV80()
 	gCompareA = (uint32_t)256 * 25.6 * CmpA_ns;
 }
 
-//void Calculate_optimal_pointV100_old()
-//{
-//	float_t Iload = gOutputCurrent;
-//	float_t CmpA_ns;
-//
-//	float_t tmp1 = Iload / (gInputVoltage - gOutputVoltage);
-//
-//	CmpA_ns = (45.25080331 + gTonScaleOffset) * tmp1 + 582.1038287 + gTonOffset ;
-//	if(Iload >1000){
-//		CmpA_ns += -0.026 * Iload + 45;
-//	}else if(Iload>0){
-//		CmpA_ns +=0.0556 * Iload - 32;
-//	}
-//
-////	CmpA_ns = 0.055608217 * tmp1 * tmp1 * tmp1
-////			-2.26601401 * tmp1 * tmp1
-////			+ 70.76744521 * tmp1
-////			+ 513.1172458
-////			 + gTonOffset ;
-//
-//
-//	if(Iload > gMaxIloadForFED) {
-//		gFEDns_cal = 88;
-//	}else if(Iload > 0) {
-//		gFEDns_cal = -1.29555E-07 * Iload * Iload * Iload
-//				+ 0.00041374 * Iload * Iload
-//				-0.455601768 * Iload
-//				+ 282.0711943
-//				+ gFEDns_cal_offset;
-//	}else{
-//
-//	}
-//
-//	gPeriod = 0.097902748 *  gInputVoltage * (CmpA_ns - gPWMCh123.risingEdgeDelayNs/2 + gPWMCh123.fallingEdgeDelayNs/2 ) / gReferenceVoltage -1.246662741 + gPeriodOffset;
-//
-//	gCompareA = (uint32_t)256 * 25.6 * CmpA_ns;
-//}
 
 void Calculate_optimal_pointV100()
 {
