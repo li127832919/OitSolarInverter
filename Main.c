@@ -386,6 +386,7 @@ void Calculate_optimal_pointV100()
 //	CmpA_ns = (45.25080331 + gTonScaleOffset) * tmp1 + 582.1038287 + gTonOffset ;
 
 
+
 //	CmpA_ns = 0.055608217 * tmp1 * tmp1 * tmp1
 //			-2.26601401 * tmp1 * tmp1
 //			+ 70.76744521 * tmp1
