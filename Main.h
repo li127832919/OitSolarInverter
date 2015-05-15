@@ -34,11 +34,11 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
-//! \file Main.h 
+//! \file main.h 
 //!
 //! \brief  
 //! 
-//! \created on: Mar 20, 2015
+//! \created on: May 12, 2015
 //! \    author: LP
 //!
 //! (C) Copyright 2015, Oregon Tech.
@@ -48,20 +48,10 @@
 // the includes
 
 
-// modules
-
-// drivers
-
-// platforms
-
-#include "F28x_Project.h"     // Device Headerfile and Examples Include File
-#include "SFO_V8.h"
-#include "ot_gpio.h"
-#include "TI/types.h"
 
 //!
 //!
-//! \defgroup MAIN_H_
+//! \defgroup _MAIN_H_
 //!
 //@{
 
@@ -73,39 +63,18 @@ extern "C" {
 // **************************************************************************
 // the defines
 
-#define CTRL_TON_SCALE			(35.9209622)
-#define CTRL_TON_OFFSET			(9.061814856)
-
-#define CTRL_TON_SCALE2			(4927.54573)
-#define CTRL_TON_OFFSET2		(9.061814856)
-
-
-#define CTRL_PERIOD_SCALE		(0.961071979)
-#define CTRL_PERIOD_OFFSET		(7.083119)
-
-
-
-
 // **************************************************************************
 // the typedefs
 
 // **************************************************************************
 // the globals
 
-extern float duty;
-extern float_t gReferenceVoltage;
-extern uint16_t gReferenceVoltageCounts;
-extern bool_t gEnablePID;
-
-extern float_t gReferenceLoadCurrent;
-extern bool_t gEnableLoadPID;
-extern float_t gLoadDuty;
-
-
-extern float_t gTon;
 // **************************************************************************
 // the function prototypes
 
+extern __interrupt void cpu_timer2_isr(void);
+extern __interrupt void adcd_ppb_isr(void);
+extern __interrupt void adcb_ppb_isr(void);
 
 
 #ifdef __cplusplus

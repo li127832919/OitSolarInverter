@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -l"libc.a" -l"rts2800_fpu32.lib" -l"2837xD_RAM_lnk_cpu1.cmd" -l"F2837xD_Headers_nonBIOS_cpu1.cmd"
+LIBS := -l"rts2800_fpu32.lib" -l"2837xD_RAM_lnk_cpu1.cmd" -l"F2837xD_Headers_nonBIOS_cpu1.cmd" -l"libc.a"
 
